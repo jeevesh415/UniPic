@@ -2,7 +2,7 @@
   <h1><strong>Skywork-UniPic2</strong></h1>
 </div>
 
-<font size=7><div align='center' >  [[🤗 UniPic2 checkpoint](https://huggingface.co/collections/Skywork/skywork-unipic2-6899b9e1b038b24674d996fd)] [[📖 Tech Report]((https://arxiv.org/abs/2509.04548)] </font> </div>
+<font size=7><div align='center' >  [[🤗 UniPic2 checkpoint](https://huggingface.co/collections/Skywork/skywork-unipic2-6899b9e1b038b24674d996fd)] [[📖 Tech Report](https://arxiv.org/abs/2509.04548)] </font> </div>
 <div align="center">
   <img src="assets/imgs/logo.png" alt="Skywork UniPic2 Teaser" width="90%">
 </div>
