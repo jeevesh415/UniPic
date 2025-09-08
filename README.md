@@ -38,16 +38,3 @@ This project is licensed under the **MIT License** — see the [LICENSE](LICENSE
 
 ---
 
-## Citation
-If you use Skywork-UniPic in your research, please cite:
-```
-@misc{wei2025skyworkunipic20building,
-      title={Skywork UniPic 2.0: Building Kontext Model with Online RL for Unified Multimodal Model}, 
-      author={Hongyang Wei and Baixin Xu and Hongbo Liu and Cyrus Wu and Jie Liu and Yi Peng and Peiyu Wang and Zexiang Liu and Jingwen He and Yidan Xietian and Chuanxin Tang and Zidong Wang and Yichen Wei and Liang Hu and Boyi Jiang and William Li and Ying He and Yang Liu and Xuchen Song and Eric Li and Yahui Zhou},
-      year={2025},
-      eprint={2509.04548},
-      archivePrefix={arXiv},
-      primaryClass={cs.CV},
-      url={https://arxiv.org/abs/2509.04548}, 
-}
-```
