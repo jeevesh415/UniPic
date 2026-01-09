@@ -12,16 +12,21 @@
 ## 📝 Overview
 
 Welcome to the **Skywork-UniPic** repository!  
-This repository hosts the **model weights** and **official implementations** of our unified multimodal models, featuring two distinct modeling paradigms:
+This repository hosts the **model weights** and **official implementations** of our unified multimodal models, featuring three distinct modeling paradigms:
 
+
+- **UniPic-3.0** — **Consistency Model** and **Distribution-Matching Distillation** based image editing model, providing super-fast and high-quality image editing capabilities with efficient training and inference.
+- **UniPic-2.0 Series** — *SD3.5M-Kontext* and *MetaQuery* variants based on Efficient Architectures with Diffusion Post-Training, delivering state-of-the-art performance in text-to-image generation, fine-grained image editing, and multimodal reasoning.
 - **UniPic-1.0** — *1.5B parameters*, **Unified Autoregressive Modeling** for joint visual understanding and generation, enabling a single transformer to handle both perception and synthesis tasks.  
-- **UniPic-2.0 Series** — *SD3.5M-Kontext* and *MetaQuery* variants based on **Efficient Architectures** with **Diffusion Post-Training**, delivering state-of-the-art performance in text-to-image generation, fine-grained image editing, and multimodal reasoning.
+
+
 
 ---
 ## 🔥 Latest News
 
 | Date       | Update |
 |------------|--------|
+| **2026-01-09** | Released **UniPic-3** — Consistency Model and Distribution-Matching Distillation for Super-Fast Image Editing <br> [![GitHub](https://img.shields.io/badge/GitHub-Repo-blue?logo=github)](UniPic-3/README.md) [![HuggingFace](https://img.shields.io/badge/🤗%20HuggingFace-Collection-orange)](https://huggingface.co/collections/Skywork/skywork-unipic3)|
 | **2025-08-13** | Released **UniPic-2** — Unified Model Weights with Diffusion-based Post-Training <br> [![GitHub](https://img.shields.io/badge/GitHub-Repo-blue?logo=github)](https://github.com/SkyworkAI/UniPic/blob/main/UniPic-2/README.md) [![HuggingFace](https://img.shields.io/badge/🤗%20HuggingFace-Collection-orange)](https://huggingface.co/collections/Skywork/skywork-unipic2-6899b9e1b038b24674d996fd) [![arXiv](https://img.shields.io/badge/arXiv-2509.04548-b31b1b?logo=arxiv)](https://arxiv.org/abs/2509.04548)|
 | **2025-07-30** | Released **UniPic-1** — Autoregressive unified modeling from scratch <br> [![GitHub](https://img.shields.io/badge/GitHub-Repo-blue?logo=github)](https://github.com/SkyworkAI/UniPic2/tree/main/UniPic-1) [![HuggingFace](https://img.shields.io/badge/🤗%20HuggingFace-Collection-orange)](https://huggingface.co/collections/Skywork/skywork-unipic-6888c0789cdb82457b2acf32) [![arXiv](https://img.shields.io/badge/arXiv-2508.03320-b31b1b?logo=arxiv)](https://www.arxiv.org/abs/2508.03320)|
 ---
