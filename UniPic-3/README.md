@@ -25,53 +25,10 @@ UniPic-3/
 │       ├── train_dmd.sh     # DMD training script
 │       └── inference.sh     # Inference script
 ```
-
-## 🚀 Training
-
-### Consistency Model (CM) Training
-Checkpoint: [Skywork/Unipic3-DMD](https://huggingface.co/Skywork/Unipic3-Consistency-Model)
-
-Consistency Model training learns consistent representations for image editing.
-
-**Training Code**: `qwen_image_edit_fast/train_cm.py`  
-**Launch Script**: `qwen_image_edit_fast/scripts/train_cm.sh`
-
-**Key Parameters**:
-- `--guidance_scale`: Guidance scale factor (default: 1.75)
-- `--train_steps`: Number of training steps (default: 20000)
-- `--ckpt_steps`: Checkpoint saving interval (default: 1000)
-- `--accum_steps`: Gradient accumulation steps (default: 4)
-- `--ema_rate`: EMA decay rate (default: 0.95)
-- `--tangent_norm`: Whether to normalize tangent vectors
-- `--gradient_checkpointing`: Whether to enable gradient checkpointing
-
-**Example Command**:
-```bash
-bash qwen_image_edit_fast/scripts/train_cm.sh
-```
-
-### Distribution-Matching Distillation (DMD) Training
-Checkpoint: [Skywork/Unipic3-DMD](https://huggingface.co/Skywork/Unipic3-DMD)
-
-Distribution-Matching Distillation further distills from the Consistency Model to improve generation quality.
-
-**Training Code**: `qwen_image_edit_fast/train_dmd.py`  
-**Launch Script**: `qwen_image_edit_fast/scripts/train_dmd.sh`
-
-**Key Parameters**:
-- `--guidance_scale`: Guidance scale factor (default: 6.0)
-- `--lr_scheduler`: Learning rate scheduler (default: cosine)
-- `--train_steps`: Number of training steps (default: 20000)
-- `--ckpt_steps`: Checkpoint saving interval (default: 1000)
-- `--accum_steps`: Gradient accumulation steps (default: 1)
-- `--gradient_checkpointing`: Whether to enable gradient checkpointing
-
-**Example Command**:
-```bash
-bash qwen_image_edit_fast/scripts/train_dmd.sh
-```
-
 ## 🔍 Inference and Evaluation
+[Skywork/Unipic3-Distribution Matching Distillation Model](https://huggingface.co/Skywork/Unipic3-DMD)
+
+[Skywork/Unipic3-Consistency-Model](https://huggingface.co/Skywork/Unipic3-Consistency-Model)
 
 ### Batch Inference
 
@@ -104,6 +61,47 @@ Or use the launch script:
 ```bash
 bash qwen_image_edit_fast/scripts/inference.sh
 ```
+
+
+## 🚀 Training
+
+### Consistency Model (CM) Training
+
+**Training Code**: `qwen_image_edit_fast/train_cm.py`  
+**Launch Script**: `qwen_image_edit_fast/scripts/train_cm.sh`
+
+**Key Parameters**:
+- `--guidance_scale`: Guidance scale factor (default: 1.75)
+- `--train_steps`: Number of training steps (default: 20000)
+- `--ckpt_steps`: Checkpoint saving interval (default: 1000)
+- `--accum_steps`: Gradient accumulation steps (default: 4)
+- `--ema_rate`: EMA decay rate (default: 0.95)
+- `--tangent_norm`: Whether to normalize tangent vectors
+- `--gradient_checkpointing`: Whether to enable gradient checkpointing
+
+**Example Command**:
+```bash
+bash qwen_image_edit_fast/scripts/train_cm.sh
+```
+
+### Distribution-Matching Distillation (DMD) Training
+
+**Training Code**: `qwen_image_edit_fast/train_dmd.py`  
+**Launch Script**: `qwen_image_edit_fast/scripts/train_dmd.sh`
+
+**Key Parameters**:
+- `--guidance_scale`: Guidance scale factor (default: 6.0)
+- `--lr_scheduler`: Learning rate scheduler (default: cosine)
+- `--train_steps`: Number of training steps (default: 20000)
+- `--ckpt_steps`: Checkpoint saving interval (default: 1000)
+- `--accum_steps`: Gradient accumulation steps (default: 1)
+- `--gradient_checkpointing`: Whether to enable gradient checkpointing
+
+**Example Command**:
+```bash
+bash qwen_image_edit_fast/scripts/train_dmd.sh
+```
+
 
 ## 📝 Configuration Files
 
