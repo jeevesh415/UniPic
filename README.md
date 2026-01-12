@@ -5,19 +5,24 @@
 
 ---
 
-<div align="center">
-  <img src="UniPic-2/assets/imgs/teaser.png" alt="Skywork UniPic2 Teaser" width="90%">
-</div>
-
 ## 📝 Overview
 
 Welcome to the **Skywork-UniPic** repository!  
 This repository hosts the **model weights** and **official implementations** of our unified multimodal models, featuring three distinct modeling paradigms:
 
 
-- **UniPic-3.0** — **Consistency Model** and **Distribution-Matching Distillation** based image editing model, providing super-fast and high-quality image editing capabilities with efficient training and inference.
-- **UniPic-2.0 Series** — *SD3.5M-Kontext* and *MetaQuery* variants based on Efficient Architectures with Diffusion Post-Training, delivering state-of-the-art performance in text-to-image generation, fine-grained image editing, and multimodal reasoning.
-- **UniPic-1.0** — *1.5B parameters*, **Unified Autoregressive Modeling** for joint visual understanding and generation, enabling a single transformer to handle both perception and synthesis tasks.  
+- **UniPic-3([UniPic-3/README.md](https://github.com/SkyworkAI/UniPic/tree/main/UniPic-3))** — **Consistency Model** and **Distribution-Matching Distillation** based image editing model, providing super-fast and high-quality image editing capabilities with efficient training and inference.
+
+  <div align="center">
+    <img src="https://github.com/SkyworkAI/UniPic/blob/main/UniPic-3/unipic3.png" alt="UniPic-3 Teaser" width="90%">
+  </div>
+
+- **UniPic-2([UniPic-2/README.md](https://github.com/SkyworkAI/UniPic/tree/main/UniPic-2))** — *SD3.5M-Kontext* and *MetaQuery* variants based on Efficient Architectures with Diffusion Post-Training, delivering state-of-the-art performance in text-to-image generation, fine-grained image editing, and multimodal reasoning.
+
+  <div align="center">
+    <img src="UniPic-2/assets/imgs/teaser.png" alt="UniPic-2 Teaser" width="90%">
+  </div>
+- **UniPic-1([UniPic-1/README.md](https://github.com/SkyworkAI/UniPic/tree/main/UniPic-1))** — *1.5B parameters*, **Unified Autoregressive Modeling** for joint visual understanding and generation, enabling a single transformer to handle both perception and synthesis tasks.  
 
 
 
