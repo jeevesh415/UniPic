@@ -29,7 +29,7 @@ UniPic-3/
 ## 🚀 Training
 
 ### Consistency Model (CM) Training
-
+Checkpoint: [Skywork/Unipic3-DMD](https://huggingface.co/Skywork/Unipic3-Consistency-Model)
 Consistency Model training learns consistent representations for image editing.
 
 **Training Code**: `qwen_image_edit_fast/train_cm.py`  
@@ -50,6 +50,7 @@ bash qwen_image_edit_fast/scripts/train_cm.sh
 ```
 
 ### Distribution-Matching Distillation (DMD) Training
+Checkpoint: [Skywork/Unipic3-DMD](https://huggingface.co/Skywork/Unipic3-DMD)
 
 Distribution-Matching Distillation further distills from the Consistency Model to improve generation quality.
 
