@@ -3,7 +3,6 @@
   <em>Unified multimodal models for image understanding, generation, and editing</em>
 </p>
 
----
 
 ## 📝 Overview
 
