@@ -30,6 +30,7 @@ UniPic-3/
 
 ### Consistency Model (CM) Training
 Checkpoint: [Skywork/Unipic3-DMD](https://huggingface.co/Skywork/Unipic3-Consistency-Model)
+
 Consistency Model training learns consistent representations for image editing.
 
 **Training Code**: `qwen_image_edit_fast/train_cm.py`  
