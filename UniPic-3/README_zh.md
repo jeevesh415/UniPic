@@ -134,12 +134,44 @@ bash qwen_image_edit_fast/scripts/train_dmd.sh
 
 ### 模型权重
 
-| 模型 | HuggingFace |
-|------|-------------|
-| Consistency Model | [Skywork/Unipic3-Consistency-Model](https://huggingface.co/Skywork/Unipic3-Consistency-Model) |
-| DMD Model | [Skywork/Unipic3-DMD](https://huggingface.co/Skywork/Unipic3-DMD) |
+| 模型 | HuggingFace | 推理步数 |
+|------|-------------|---------|
+| Teacher Model | [Skywork/Unipic3](https://huggingface.co/Skywork/Unipic3) | 50 步 |
+| Consistency Model | [Skywork/Unipic3-Consistency-Model](https://huggingface.co/Skywork/Unipic3-Consistency-Model) | 8 步 |
+| DMD Model | [Skywork/Unipic3-DMD](https://huggingface.co/Skywork/Unipic3-DMD) | 4 步 |
 
-### 批量推理
+### 单图推理（Teacher 模型）
+
+**推理代码**: `qwen_image_edit/inference.py`  
+**启动脚本**: `qwen_image_edit/scripts/inference.sh`
+
+**主要参数**:
+- `--transformer`: Transformer 权重路径（HuggingFace 模型 ID 或本地路径）
+  - 使用 `Skywork/Unipic3` 加载 Teacher 模型
+- `--image_paths`: 输入图像路径，支持多张图像
+- `--prompt`: 编辑指令文本
+- `--true_cfg_scale`: CFG 缩放参数（默认 4.0）
+- `--seed`: 随机种子（默认 0）
+- `--output_path`: 输出图像路径（默认 example_ours.png）
+
+**示例命令**:
+```bash
+# 使用 HuggingFace Teacher 模型（50 步）
+python qwen_image_edit/inference.py \
+    --transformer Skywork/Unipic3 \
+    --image_paths qwen_image_edit/example/gemini_pig_remove_hat.png qwen_image_edit/example/gemini_t2i_sunglasses.png \
+    --prompt "A pig wearing sunglasses." \
+    --true_cfg_scale 4.0 \
+    --seed 0 \
+    --output_path "output.png"
+```
+
+或使用启动脚本:
+```bash
+bash qwen_image_edit/scripts/inference.sh
+```
+
+### 批量推理（CM/DMD 模型）
 
 **推理代码**: `qwen_image_edit_fast/batch_inference.py`  
 **启动脚本**: `qwen_image_edit_fast/scripts/inference.sh`
@@ -147,8 +179,10 @@ bash qwen_image_edit_fast/scripts/train_dmd.sh
 **主要参数**:
 - `--jsonl_path`: 输入的 JSONL 文件路径
 - `--output_dir`: 输出目录
-- `--transformer`: Transformer 权重路径
-- `--num_inference_steps`: 推理步数（默认 4）
+- `--transformer`: Transformer 权重路径（HuggingFace 模型 ID 或本地路径）
+  - 使用 `Skywork/Unipic3-DMD/ema_transformer` 加载 DMD 模型（4 步）
+  - 使用 `Skywork/Unipic3-Consistency-Model/ema_transformer` 加载 CM 模型（8 步）
+- `--num_inference_steps`: 推理步数（默认 4 for DMD，8 for CM）
 - `--true_cfg_scale`: CFG 缩放参数（默认 4.0）
 - `--distributed`: 是否启用分布式推理
 - `--skip_existing`: 是否跳过已存在的文件
@@ -162,7 +196,7 @@ python -m torch.distributed.launch --nproc_per_node=1 --master_port 29501 --use_
     --distributed \
     --num_inference_steps 4 \
     --true_cfg_scale 4.0 \
-    --transformer work_dirs/Qwen-Image-Edit-DMD-full-20k-bsz64/step20000/ema_transformer \
+    --transformer Skywork/Unipic3-DMD/ema_transformer \
     --skip_existing
 ```
 

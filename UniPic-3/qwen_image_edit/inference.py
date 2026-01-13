@@ -108,10 +108,20 @@ if __name__ == '__main__':
 
     """
     Example usage:
+    # Using HuggingFace model
     python qwen_image_edit/inference.py \
-        --transformer work_dirs/model/transformer \
+        --transformer Skywork/Unipic3-DMD \
         --image_paths qwen_image_edit/example/gemini_pig_remove_hat.png qwen_image_edit/example/gemini_t2i_sunglasses.png \
         --prompt "A pig wearing sunglasses." \
+        --true_cfg_scale 4.0 \
+        --seed 0 \
+        --output_path "output.png"
+    
+    # Using local checkpoint
+    python qwen_image_edit/inference.py \
+        --transformer work_dirs/model/transformer \
+        --image_paths qwen_image_edit/example/gemini_pig_remove_hat.png \
+        --prompt "Remove the hat." \
         --true_cfg_scale 4.0 \
         --seed 0 \
         --output_path "output.png"

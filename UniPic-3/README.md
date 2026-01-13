@@ -134,12 +134,44 @@ bash qwen_image_edit_fast/scripts/train_dmd.sh
 
 ### Model Weights
 
-| Model | HuggingFace |
-|-------|-------------|
-| Consistency Model | [Skywork/Unipic3-Consistency-Model](https://huggingface.co/Skywork/Unipic3-Consistency-Model) |
-| DMD Model | [Skywork/Unipic3-DMD](https://huggingface.co/Skywork/Unipic3-DMD) |
+| Model | HuggingFace | Inference Steps |
+|-------|-------------|-----------------|
+| Teacher Model | [Skywork/Unipic3](https://huggingface.co/Skywork/Unipic3) | 50 steps |
+| Consistency Model | [Skywork/Unipic3-Consistency-Model](https://huggingface.co/Skywork/Unipic3-Consistency-Model) | 8 steps |
+| DMD Model | [Skywork/Unipic3-DMD](https://huggingface.co/Skywork/Unipic3-DMD) | 4 steps |
 
-### Batch Inference
+### Single Image Inference (Teacher Model)
+
+**Inference Code**: `qwen_image_edit/inference.py`  
+**Launch Script**: `qwen_image_edit/scripts/inference.sh`
+
+**Key Parameters**:
+- `--transformer`: Path to Transformer weights (HuggingFace model ID or local path)
+  - Use `Skywork/Unipic3` for Teacher model
+- `--image_paths`: Input image path(s), supports multiple images
+- `--prompt`: Editing instruction text
+- `--true_cfg_scale`: CFG scale parameter (default: 4.0)
+- `--seed`: Random seed (default: 0)
+- `--output_path`: Output image path (default: example_ours.png)
+
+**Example Command**:
+```bash
+# Using HuggingFace Teacher model (50 steps)
+python qwen_image_edit/inference.py \
+    --transformer Skywork/Unipic3 \
+    --image_paths qwen_image_edit/example/gemini_pig_remove_hat.png qwen_image_edit/example/gemini_t2i_sunglasses.png \
+    --prompt "A pig wearing sunglasses." \
+    --true_cfg_scale 4.0 \
+    --seed 0 \
+    --output_path "output.png"
+```
+
+Or use the launch script:
+```bash
+bash qwen_image_edit/scripts/inference.sh
+```
+
+### Batch Inference (CM/DMD Models)
 
 **Inference Code**: `qwen_image_edit_fast/batch_inference.py`  
 **Launch Script**: `qwen_image_edit_fast/scripts/inference.sh`
@@ -147,8 +179,10 @@ bash qwen_image_edit_fast/scripts/train_dmd.sh
 **Key Parameters**:
 - `--jsonl_path`: Path to input JSONL file
 - `--output_dir`: Output directory
-- `--transformer`: Path to Transformer weights
-- `--num_inference_steps`: Number of inference steps (default: 4)
+- `--transformer`: Path to Transformer weights (HuggingFace model ID or local path)
+  - Use `Skywork/Unipic3-DMD/ema_transformer` for DMD model (4 steps)
+  - Use `Skywork/Unipic3-Consistency-Model/ema_transformer` for CM model (8 steps)
+- `--num_inference_steps`: Number of inference steps (default: 4 for DMD, 8 for CM)
 - `--true_cfg_scale`: CFG scale parameter (default: 4.0)
 - `--distributed`: Whether to enable distributed inference
 - `--skip_existing`: Whether to skip existing files
@@ -162,7 +196,7 @@ python -m torch.distributed.launch --nproc_per_node=1 --master_port 29501 --use_
     --distributed \
     --num_inference_steps 4 \
     --true_cfg_scale 4.0 \
-    --transformer work_dirs/Qwen-Image-Edit-DMD-full-20k-bsz64/step20000/ema_transformer \
+    --transformer Skywork/Unipic3-DMD/ema_transformer  \
     --skip_existing
 ```
 
