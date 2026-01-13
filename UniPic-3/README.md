@@ -2,33 +2,142 @@
 
 [English](README.md) | [中文](README_zh.md)
 
-UniPic-3 is an image editing model based on Qwen-Image-Edit, utilizing Consistency Model and Distribution-Matching Distillation training methods.
+🔥 **Open-source SOTA Multi-Image Editing Model**
+
+UniPic-3 is a unified framework for **single-image editing** and **multi-image composition**, built on Qwen-Image-Edit with Consistency Model + Distribution-Matching Distillation.
+
+| Feature | Description |
+|---------|-------------|
+| **Unified Modeling** | Single-image editing & multi-image composition in one architecture |
+| **Flexible Input** | Supports **1–6 input images** with arbitrary output resolutions |
+| **Fast Inference** | **8 steps** with **12.5× speedup**, no quality loss |
+| **High-Quality Data** | 215K curated multi-image composition samples |
 
 ## 📁 File Structure
 
 ```
 UniPic-3/
-├── train_cm.py              # Consistency Model training code
-├── train_dmd.py             # Distribution-Matching Distillation training code
-├── batch_inference.py       # Batch inference code
-├── pipeline_qwenimage_edit.py  # Pipeline implementation
-├── requirements.txt         # Python dependencies
-├── qwen_image_edit_fast/   # Core code directory
-│   ├── train_cm.py          # CM training code
-│   ├── train_dmd.py         # DMD training code
-│   ├── batch_inference.py   # Batch inference code
+├── README.md                    # English documentation
+├── README_zh.md                 # Chinese documentation
+├── requirements.txt             # Python dependencies
+├── unipic3.png                  # Model teaser image
+│
+├── qwen_image_edit/             # Teacher model training (original full-step diffusion)
+│   ├── dataset.py               # Dataset implementation
+│   ├── inference.py             # Single inference
 │   ├── pipeline_qwenimage_edit.py  # Pipeline implementation
-│   ├── configs/             # Configuration files directory
+│   ├── train_fsdp_bsz1.py       # FSDP training code
+│   ├── configs/                 # Configuration files
 │   │   └── gemini_all_datasets.py
-│   └── scripts/             # Launch scripts directory
-│       ├── train_cm.sh      # CM training script
-│       ├── train_dmd.sh     # DMD training script
-│       └── inference.sh     # Inference script
+│   ├── scripts/
+│   │   ├── train.sh             # Training script
+│   │   └── inference.sh         # Inference script
+│   └── example/                 # Example images and scripts
+│
+└── qwen_image_edit_fast/        # CM + DMD distillation training (fast inference)
+    ├── train_cm.py              # Consistency Model training
+    ├── train_dmd.py             # Distribution-Matching Distillation training
+    ├── train_cm_dmd.py          # Combined CM + DMD training
+    ├── batch_inference.py       # Batch inference
+    ├── inference.py             # Single inference
+    ├── pipeline_qwenimage_edit.py  # Pipeline implementation
+    ├── configs/                 # Configuration files
+    │   └── gemini_all_datasets.py
+    ├── scripts/
+    │   ├── train_cm.sh          # CM training script
+    │   ├── train_dmd.sh         # DMD training script
+    │   └── inference.sh         # Inference script
+    └── tools/
+        └── merge_ckpt.py        # Checkpoint merging tool
 ```
-## 🔍 Inference and Evaluation
-[Skywork/Unipic3-Distribution Matching Distillation Model](https://huggingface.co/Skywork/Unipic3-DMD)
 
-[Skywork/Unipic3-Consistency-Model](https://huggingface.co/Skywork/Unipic3-Consistency-Model)
+## 🔧 Environment Setup
+
+1. **Install Python Dependencies**:
+```bash
+pip install -r requirements.txt
+```
+
+Note: If using CUDA version of PyTorch, please install the corresponding version from [PyTorch website](https://pytorch.org/) according to your CUDA version, then install other dependencies:
+```bash
+pip install -r requirements.txt --no-deps torch torchvision torchaudio
+```
+
+2. **Set PYTHONPATH** (optional, if code is not in current directory):
+```bash
+export PYTHONPATH="$(pwd):${PYTHONPATH:-}"
+```
+
+3. **Enter Project Directory**:
+```bash
+cd UniPic-3
+```
+
+## 🚀 Training
+
+The training pipeline follows: **Teacher Model → Consistency Model (CM) → Distribution-Matching Distillation (DMD)**
+
+### Step 1: Teacher Model Training (Original Full-Step Diffusion)
+
+Train the teacher model using standard diffusion training with full inference steps.
+
+**Training Code**: `qwen_image_edit/train_fsdp_bsz1.py`  
+**Launch Script**: `qwen_image_edit/scripts/train.sh`
+
+**Example Command**:
+```bash
+bash qwen_image_edit/scripts/train.sh
+```
+
+### Step 2: Consistency Model (CM) Training
+
+Distill the teacher model into a consistency model for faster inference.
+
+**Training Code**: `qwen_image_edit_fast/train_cm.py`  
+**Launch Script**: `qwen_image_edit_fast/scripts/train_cm.sh`
+
+**Key Parameters**:
+- `--guidance_scale`: Guidance scale factor (default: 1.75)
+- `--train_steps`: Number of training steps (default: 20000)
+- `--ckpt_steps`: Checkpoint saving interval (default: 1000)
+- `--accum_steps`: Gradient accumulation steps (default: 4)
+- `--ema_rate`: EMA decay rate (default: 0.95)
+- `--tangent_norm`: Whether to normalize tangent vectors
+- `--gradient_checkpointing`: Whether to enable gradient checkpointing
+
+**Example Command**:
+```bash
+bash qwen_image_edit_fast/scripts/train_cm.sh
+```
+
+### Step 3: Distribution-Matching Distillation (DMD) Training
+
+Further distill from the consistency model to improve generation quality.
+
+**Training Code**: `qwen_image_edit_fast/train_dmd.py`  
+**Launch Script**: `qwen_image_edit_fast/scripts/train_dmd.sh`
+
+**Key Parameters**:
+- `--guidance_scale`: Guidance scale factor (default: 6.0)
+- `--lr_scheduler`: Learning rate scheduler (default: cosine)
+- `--train_steps`: Number of training steps (default: 20000)
+- `--ckpt_steps`: Checkpoint saving interval (default: 1000)
+- `--accum_steps`: Gradient accumulation steps (default: 1)
+- `--gradient_checkpointing`: Whether to enable gradient checkpointing
+
+**Example Command**:
+```bash
+bash qwen_image_edit_fast/scripts/train_dmd.sh
+```
+
+## 🔍 Inference
+
+### Model Weights
+
+| Model | HuggingFace |
+|-------|-------------|
+| Consistency Model | [Skywork/Unipic3-Consistency-Model](https://huggingface.co/Skywork/Unipic3-Consistency-Model) |
+| DMD Model | [Skywork/Unipic3-DMD](https://huggingface.co/Skywork/Unipic3-DMD) |
 
 ### Batch Inference
 
@@ -62,74 +171,11 @@ Or use the launch script:
 bash qwen_image_edit_fast/scripts/inference.sh
 ```
 
-
-## 🚀 Training
-
-### Consistency Model (CM) Training
-
-**Training Code**: `qwen_image_edit_fast/train_cm.py`  
-**Launch Script**: `qwen_image_edit_fast/scripts/train_cm.sh`
-
-**Key Parameters**:
-- `--guidance_scale`: Guidance scale factor (default: 1.75)
-- `--train_steps`: Number of training steps (default: 20000)
-- `--ckpt_steps`: Checkpoint saving interval (default: 1000)
-- `--accum_steps`: Gradient accumulation steps (default: 4)
-- `--ema_rate`: EMA decay rate (default: 0.95)
-- `--tangent_norm`: Whether to normalize tangent vectors
-- `--gradient_checkpointing`: Whether to enable gradient checkpointing
-
-**Example Command**:
-```bash
-bash qwen_image_edit_fast/scripts/train_cm.sh
-```
-
-### Distribution-Matching Distillation (DMD) Training
-
-**Training Code**: `qwen_image_edit_fast/train_dmd.py`  
-**Launch Script**: `qwen_image_edit_fast/scripts/train_dmd.sh`
-
-**Key Parameters**:
-- `--guidance_scale`: Guidance scale factor (default: 6.0)
-- `--lr_scheduler`: Learning rate scheduler (default: cosine)
-- `--train_steps`: Number of training steps (default: 20000)
-- `--ckpt_steps`: Checkpoint saving interval (default: 1000)
-- `--accum_steps`: Gradient accumulation steps (default: 1)
-- `--gradient_checkpointing`: Whether to enable gradient checkpointing
-
-**Example Command**:
-```bash
-bash qwen_image_edit_fast/scripts/train_dmd.sh
-```
-
-
 ## 📝 Configuration Files
 
-Configuration files are located at `qwen_image_edit_fast/configs/gemini_all_datasets.py`, containing dataset configuration information.
-
-## 🔧 Environment Setup
-
-1. **Install Python Dependencies**:
-```bash
-pip install -r requirements.txt
-```
-
-Note: If using CUDA version of PyTorch, please install the corresponding version from [PyTorch website](https://pytorch.org/) according to your CUDA version, then install other dependencies:
-```bash
-pip install -r requirements.txt --no-deps torch torchvision torchaudio
-```
-
-2. **Set PYTHONPATH** (optional, if code is not in current directory):
-```bash
-export PYTHONPATH="$(pwd):${PYTHONPATH:-}"
-```
-
-3. **Enter Project Directory**:
-```bash
-cd UniPic-3
-# Or if running from another location, set CODE_DIR environment variable
-export CODE_DIR="$(pwd)/UniPic-3"
-```
+Configuration files are located at:
+- `qwen_image_edit/configs/` - Teacher model configs
+- `qwen_image_edit_fast/configs/` - CM/DMD training configs
 
 ## 📌 Notes
 
@@ -137,14 +183,3 @@ export CODE_DIR="$(pwd)/UniPic-3"
 2. Ensure sufficient GPU memory and storage space
 3. Distributed training requires proper environment variable settings (`MLP_WORKER_NUM`, `MLP_ROLE_INDEX`, `MLP_WORKER_0_HOST`, `MLP_WORKER_0_PORT`)
 4. Ensure the input JSONL file format is correct during inference
-
-## 📚 Related Resources
-
-- **Code Location**: `qwen_image_edit_fast/`
-- **Training Code**:
-  - Consistency training: `qwen_image_edit_fast/train_cm.py`
-  - Distribution-Matching Distillation: `qwen_image_edit_fast/train_dmd.py`
-- **Inference Code**: `qwen_image_edit_fast/batch_inference.py`
-- **Checkpoints** (relative paths, configurable via environment variables):
-  - Consistency models: `work_dirs/Qwen-Image-Edit-CM-full-20k-bsz256-all-datasets`
-  - Distribution-Matching Distillation: `work_dirs/Qwen-Image-Edit-DMD-full-20k-bsz64`
