@@ -13,7 +13,7 @@ This repository hosts the **model weights** and **official implementations** of 
 - **UniPic-3([UniPic-3/README.md](https://github.com/SkyworkAI/UniPic/tree/main/UniPic-3))** — **Consistency Model** and **Distribution-Matching Distillation** based image editing model, providing super-fast and high-quality image editing capabilities with efficient training and inference.
 
   <div align="center">
-    <img src="https://github.com/SkyworkAI/UniPic/blob/main/UniPic-3/unipic3.png" alt="UniPic-3 Teaser" width="90%">
+    <img src="UniPic-3/unipic3.png" alt="UniPic-3 Teaser" width="90%">
   </div>
 
 - **UniPic-2([UniPic-2/README.md](https://github.com/SkyworkAI/UniPic/tree/main/UniPic-2))** — *SD3.5M-Kontext* and *MetaQuery* variants based on Efficient Architectures with Diffusion Post-Training, delivering state-of-the-art performance in text-to-image generation, fine-grained image editing, and multimodal reasoning.
