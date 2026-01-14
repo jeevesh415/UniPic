@@ -1,0 +1,21 @@
+# Gradio and UI
+gradio>=4.0.0
+
+# PyTorch
+torch>=2.0.0
+torchvision
+torchaudio
+
+# Transformers and Diffusers
+transformers>=4.56.0
+diffusers>=0.36.0
+accelerate>=1.10.0
+
+# Image processing
+pillow>=10.0.0
+numpy
+
+# Utilities
+huggingface-hub
+safetensors
+

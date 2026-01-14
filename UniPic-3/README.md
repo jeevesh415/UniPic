@@ -138,7 +138,7 @@ bash qwen_image_edit_fast/scripts/train_dmd.sh
 |-------|-------------|-----------------|
 | Base Model | [Skywork/Unipic3](https://huggingface.co/Skywork/Unipic3) | 50 steps |
 | Consistency Model | [Skywork/Unipic3-Consistency-Model](https://huggingface.co/Skywork/Unipic3-Consistency-Model) | 8 steps |
-| DMD Model | [Skywork/Unipic3-DMD](https://huggingface.co/Skywork/Unipic3-DMD) | 4 steps |
+| DMD Model | [Skywork/Unipic3-DMD](https://huggingface.co/Skywork/Unipic3-DMD) | 8 steps |
 
 ### Base Model Inference
 
@@ -182,7 +182,7 @@ bash qwen_image_edit/scripts/inference.sh
 - `--transformer`: Path to Transformer weights (HuggingFace model ID or local path)
   - Use `Skywork/Unipic3-DMD/ema_transformer` for DMD model (4 steps)
   - Use `Skywork/Unipic3-Consistency-Model/ema_transformer` for CM model (8 steps)
-- `--num_inference_steps`: Number of inference steps (default: 4 for DMD, 8 for CM)
+- `--num_inference_steps`: Number of inference steps (default: 8 for CM and DMD)
 - `--true_cfg_scale`: CFG scale parameter (default: 4.0)
 - `--distributed`: Whether to enable distributed inference
 - `--skip_existing`: Whether to skip existing files
