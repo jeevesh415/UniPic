@@ -10,7 +10,7 @@ UniPic-3 is a unified framework for **single-image editing** and **multi-image c
 |---------|-------------|
 | **Unified Modeling** | Single-image editing & multi-image composition in one architecture |
 | **Flexible Input** | Supports **1–6 input images** with arbitrary output resolutions |
-| **Fast Inference** | **8 steps** with **12.5× speedup**, no quality loss |
+| **Fast Inference** | **8 steps** with **12.5× speedup** |
 | **High-Quality Data** | 215K curated multi-image composition samples |
 
 ## 📁 File Structure
@@ -22,7 +22,7 @@ UniPic-3/
 ├── requirements.txt             # Python dependencies
 ├── unipic3.png                  # Model teaser image
 │
-├── qwen_image_edit/             # Teacher model training (original full-step diffusion)
+├── qwen_image_edit/             # Base model training (original full-step diffusion)
 │   ├── dataset.py               # Dataset implementation
 │   ├── inference.py             # Single inference
 │   ├── pipeline_qwenimage_edit.py  # Pipeline implementation
@@ -75,11 +75,11 @@ cd UniPic-3
 
 ## 🚀 Training
 
-The training pipeline follows: **Teacher Model → Consistency Model (CM) → Distribution-Matching Distillation (DMD)**
+The training pipeline follows: **Base Model → Consistency Model (CM) → Distribution-Matching Distillation (DMD)**
 
-### Step 1: Teacher Model Training (Original Full-Step Diffusion)
+### Step 1: Base Model Training (Original Full-Step Diffusion)
 
-Train the teacher model using standard diffusion training with full inference steps.
+Train the Base model using standard diffusion training with full inference steps.
 
 **Training Code**: `qwen_image_edit/train_fsdp_bsz1.py`  
 **Launch Script**: `qwen_image_edit/scripts/train.sh`
@@ -91,7 +91,7 @@ bash qwen_image_edit/scripts/train.sh
 
 ### Step 2: Consistency Model (CM) Training
 
-Distill the teacher model into a consistency model for faster inference.
+Distill the Base model into a consistency model for faster inference.
 
 **Training Code**: `qwen_image_edit_fast/train_cm.py`  
 **Launch Script**: `qwen_image_edit_fast/scripts/train_cm.sh`
@@ -136,18 +136,18 @@ bash qwen_image_edit_fast/scripts/train_dmd.sh
 
 | Model | HuggingFace | Inference Steps |
 |-------|-------------|-----------------|
-| Teacher Model | [Skywork/Unipic3](https://huggingface.co/Skywork/Unipic3) | 50 steps |
+| Base Model | [Skywork/Unipic3](https://huggingface.co/Skywork/Unipic3) | 50 steps |
 | Consistency Model | [Skywork/Unipic3-Consistency-Model](https://huggingface.co/Skywork/Unipic3-Consistency-Model) | 8 steps |
 | DMD Model | [Skywork/Unipic3-DMD](https://huggingface.co/Skywork/Unipic3-DMD) | 4 steps |
 
-### Single Image Inference (Teacher Model)
+### Base Model Inference
 
 **Inference Code**: `qwen_image_edit/inference.py`  
 **Launch Script**: `qwen_image_edit/scripts/inference.sh`
 
 **Key Parameters**:
 - `--transformer`: Path to Transformer weights (HuggingFace model ID or local path)
-  - Use `Skywork/Unipic3` for Teacher model
+  - Use `Skywork/Unipic3` for Base model
 - `--image_paths`: Input image path(s), supports multiple images
 - `--prompt`: Editing instruction text
 - `--true_cfg_scale`: CFG scale parameter (default: 4.0)
@@ -156,7 +156,7 @@ bash qwen_image_edit_fast/scripts/train_dmd.sh
 
 **Example Command**:
 ```bash
-# Using HuggingFace Teacher model (50 steps)
+# Using HuggingFace Base model (50 steps)
 python qwen_image_edit/inference.py \
     --transformer Skywork/Unipic3 \
     --image_paths qwen_image_edit/example/gemini_pig_remove_hat.png qwen_image_edit/example/gemini_t2i_sunglasses.png \
@@ -171,7 +171,7 @@ Or use the launch script:
 bash qwen_image_edit/scripts/inference.sh
 ```
 
-### Batch Inference (CM/DMD Models)
+### few-steps inference （CM/DMD Model）
 
 **Inference Code**: `qwen_image_edit_fast/batch_inference.py`  
 **Launch Script**: `qwen_image_edit_fast/scripts/inference.sh`
@@ -208,7 +208,7 @@ bash qwen_image_edit_fast/scripts/inference.sh
 ## 📝 Configuration Files
 
 Configuration files are located at:
-- `qwen_image_edit/configs/` - Teacher model configs
+- `qwen_image_edit/configs/` - Base model configs
 - `qwen_image_edit_fast/configs/` - CM/DMD training configs
 
 ## 📌 Notes
