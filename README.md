@@ -10,7 +10,7 @@ Welcome to the **Skywork-UniPic** repository!
 This repository hosts the **model weights** and **official implementations** of unipic unified multimodal series, featuring three distinct modeling paradigms:
 
 
-- **UniPic-3 ([README](https://github.com/SkyworkAI/UniPic/tree/main/UniPic-3))** — 🔥 **Open-source SOTA Multi-Image Editing Model**. Unified framework for single-image editing & multi-image composition. Supports **1–6 input images** with flexible resolutions. **8-step inference** with **12.5× speedup** via CM + DMD distillation.
+- **UniPic-3 ([README](https://github.com/SkyworkAI/UniPic/tree/main/UniPic-3))** — 🔥 **Open-source SOTA Multi-Image Editing Model**. Unified framework for single-image editing & multi-image composition. Supports **1–6 input images** with flexible resolutions. **8-steps inference** with **12.5× speedup** via CM + DMD distillation.
 
   <div align="center">
     <img src="UniPic-3/unipic3.png" alt="UniPic-3 Teaser" width="90%">
