@@ -180,8 +180,8 @@ bash qwen_image_edit/scripts/inference.sh
 - `--jsonl_path`: Path to input JSONL file
 - `--output_dir`: Output directory
 - `--transformer`: Path to Transformer weights (HuggingFace model ID or local path)
-  - Use `Skywork/Unipic3-DMD/ema_transformer` for DMD model (8 steps)
-  - Use `Skywork/Unipic3-Consistency-Model/ema_transformer` for CM model (8 steps)
+  - Use `Skywork/Unipic3-DMD/ema_transformer` for DMD model 
+  - Use `Skywork/Unipic3-Consistency-Model/ema_transformer` for CM model 
 - `--num_inference_steps`: Number of inference steps (default: 8 for CM and DMD)
 - `--true_cfg_scale`: CFG scale parameter (default: 4.0)
 - `--distributed`: Whether to enable distributed inference
