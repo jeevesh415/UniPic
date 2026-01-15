@@ -180,8 +180,8 @@ bash qwen_image_edit/scripts/inference.sh
 - `--jsonl_path`: 输入的 JSONL 文件路径
 - `--output_dir`: 输出目录
 - `--transformer`: Transformer 权重路径（HuggingFace 模型 ID 或本地路径）
-  - 使用 `Skywork/Unipic3-DMD/ema_transformer` 加载 DMD 模型（8 步）
-  - 使用 `Skywork/Unipic3-Consistency-Model/ema_transformer` 加载 CM 模型（8 步）
+  - 使用 `Skywork/Unipic3-DMD/ema_transformer` 加载 DMD 模型
+  - 使用 `Skywork/Unipic3-Consistency-Model/ema_transformer` 加载 CM 模型
 - `--num_inference_steps`: 推理步数（默认 8 for CM and DMD）
 - `--true_cfg_scale`: CFG 缩放参数（默认 4.0）
 - `--distributed`: 是否启用分布式推理
