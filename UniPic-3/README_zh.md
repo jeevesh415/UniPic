@@ -138,7 +138,7 @@ bash qwen_image_edit_fast/scripts/train_dmd.sh
 |------|-------------|---------|
 | Base Model | [Skywork/Unipic3](https://huggingface.co/Skywork/Unipic3) | 50 步 |
 | Consistency Model | [Skywork/Unipic3-Consistency-Model](https://huggingface.co/Skywork/Unipic3-Consistency-Model) | 8 步 |
-| DMD Model | [Skywork/Unipic3-DMD](https://huggingface.co/Skywork/Unipic3-DMD) | 4 步 |
+| DMD Model | [Skywork/Unipic3-DMD](https://huggingface.co/Skywork/Unipic3-DMD) | 8 步 |
 
 ### Base模型推理
 
