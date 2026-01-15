@@ -194,7 +194,7 @@ python -m torch.distributed.launch --nproc_per_node=1 --master_port 29501 --use_
     --jsonl_path data/val.jsonl \
     --output_dir work_dirs/output \
     --distributed \
-    --num_inference_steps 4 \
+    --num_inference_steps 8 \
     --true_cfg_scale 4.0 \
     --transformer Skywork/Unipic3-DMD/ema_transformer \
     --skip_existing
