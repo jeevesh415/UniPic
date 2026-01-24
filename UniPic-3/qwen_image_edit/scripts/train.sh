@@ -26,8 +26,8 @@ torchrun \
     --master_addr ${MLP_WORKER_0_HOST:-localhost} \
     --master_port ${MLP_WORKER_0_PORT:-29500} \
     qwen_image_edit/train_fsdp_bsz1.py \
-    qwen_image_edit/configs/gemini_all_datasets.py \
+    qwen_image_edit/configs/datasets.py \
     --gradient_checkpointing \
     --train_steps ${TRAIN_STEPS:-100000} \
     --ckpt_steps ${CKPT_STEPS:-2000} \
-    --work_dir ${WORK_DIR:-work_dirs/Qwen-Image-Edit-FSDP-6imgs-all-datasets-step100k-bsz16}
+    --work_dir ${WORK_DIR:-work_dirs/Unipic3-FSDP-all-datasets-step100k-bsz16}
