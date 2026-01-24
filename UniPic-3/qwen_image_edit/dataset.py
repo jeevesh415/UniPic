@@ -96,44 +96,6 @@ class Unipic3EditDataset(Dataset):
             print(f"Error when reading {self.data_path}:{self.data_list[idx]}: {e}", flush=True)
             return self._retry()
 
-
-class TryOnDataset(Unipic3EditDataset):
-    PROMPTS = [
-        "Combine the reference images to generate the final result.",
-        "Merge all reference items into a complete try-on result.",
-        "Apply the reference images together to produce the output.",
-        "Integrate all references into one coherent try-on result.",
-        "Construct the final output by using all provided references.",
-        "Assemble the references into the finished try-on result.",
-        "Generate the complete output by fusing the reference images.",
-        "Create the try-on result by combining all references."
-    ]
-
-    def __getitem__(self, idx):
-        try:
-            data_sample = deepcopy(self.data_list[idx])
-
-            output_image = self._read_image(data_sample.pop('person')).convert('RGB')
-            output_image = self._resize_images([output_image])[0]
-
-            input_images = [self._read_image(input_image).convert('RGB')
-                            for input_image in data_sample.values()]
-            random.shuffle(input_images)
-            input_images = self._resize_images(input_images)
-
-            prompt = random.choice(self.PROMPTS)
-
-            data = dict(
-                input_images=input_images, output_image=output_image,
-                image_dir=self.image_folder,
-                type='image2image', text=prompt)
-
-            return data
-
-        except Exception as e:
-            print(f"Error when reading {self.data_path}:{self.data_list[idx]}: {e}", flush=True)
-            return self._retry()
-
 class ConcatDataset(TorchConcatDataset):
 
     def __init__(self, datasets):

@@ -138,15 +138,12 @@ python run_gradio.py
 ```
 
 ## Citation
-If you use Skywork-UniPic in your research, please cite:
+If you use Skywork UniPic 2.0 in your research, please cite:
 ```
-@misc{wei2025skyworkunipic20building,
-      title={Skywork UniPic 2.0: Building Kontext Model with Online RL for Unified Multimodal Model}, 
-      author={Hongyang Wei and Baixin Xu and Hongbo Liu and Cyrus Wu and Jie Liu and Yi Peng and Peiyu Wang and Zexiang Liu and Jingwen He and Yidan Xietian and Chuanxin Tang and Zidong Wang and Yichen Wei and Liang Hu and Boyi Jiang and William Li and Ying He and Yang Liu and Xuchen Song and Eric Li and Yahui Zhou},
-      year={2025},
-      eprint={2509.04548},
-      archivePrefix={arXiv},
-      primaryClass={cs.CV},
-      url={https://arxiv.org/abs/2509.04548}, 
+@article{wei2025skywork,
+  title={Skywork unipic 2.0: Building kontext model with online rl for unified multimodal model},
+  author={Wei, Hongyang and Xu, Baixin and Liu, Hongbo and Wu, Cyrus and Liu, Jie and Peng, Yi and Wang, Peiyu and Liu, Zexiang and He, Jingwen and Xietian, Yidan and others},
+  journal={arXiv preprint arXiv:2509.04548},
+  year={2025}
 }
 ```

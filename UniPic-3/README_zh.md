@@ -28,11 +28,10 @@ UniPic-3/
 │   ├── pipeline_qwenimage_edit.py  # Pipeline 实现
 │   ├── train_fsdp_bsz1.py       # FSDP 训练代码
 │   ├── configs/                 # 配置文件目录
-│   │   └── gemini_all_datasets.py
+│   │   └── datasets.py          # 训练数据集配置
 │   ├── scripts/
-│   │   ├── train.sh             # 训练脚本
-│   │   └── inference.sh         # 推理脚本
-│   └── example/                 # 示例图片和脚本
+│       ├── train.sh             # 训练脚本
+│       └── inference.sh         # 推理脚本
 │
 └── qwen_image_edit_fast/        # CM + DMD 蒸馏训练（快速推理）
     ├── train_cm.py              # Consistency Model 训练
@@ -42,7 +41,7 @@ UniPic-3/
     ├── inference.py             # 单次推理
     ├── pipeline_qwenimage_edit.py  # Pipeline 实现
     ├── configs/                 # 配置文件目录
-    │   └── gemini_all_datasets.py
+    │   └── datasets.py          # 训练数据集配置
     ├── scripts/
     │   ├── train_cm.sh          # CM 训练脚本
     │   ├── train_dmd.sh         # DMD 训练脚本
@@ -218,3 +217,16 @@ bash qwen_image_edit_fast/scripts/inference.sh
 3. 分布式训练需要正确设置环境变量（`MLP_WORKER_NUM`, `MLP_ROLE_INDEX`, `MLP_WORKER_0_HOST`, `MLP_WORKER_0_PORT`）
 4. 推理时确保输入 JSONL 文件的格式正确
 
+## 引用
+如果您觉得Skywork UniPic 3.0对您有用，请在论文中按照以下格式添加引用:
+```
+@misc{wei2026skyworkunipic30unified,
+      title={Skywork UniPic 3.0: Unified Multi-Image Composition via Sequence Modeling}, 
+      author={Hongyang Wei and Hongbo Liu and Zidong Wang and Yi Peng and Baixin Xu and Size Wu and Xuying Zhang and Xianglong He and Zexiang Liu and Peiyu Wang and Xuchen Song and Yangguang Li and Yang Liu and Yahui Zhou},
+      year={2026},
+      eprint={2601.15664},
+      archivePrefix={arXiv},
+      primaryClass={cs.CV},
+      url={https://arxiv.org/abs/2601.15664}, 
+}
+```

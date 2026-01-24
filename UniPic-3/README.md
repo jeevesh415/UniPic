@@ -217,3 +217,17 @@ Configuration files are located at:
 2. Ensure sufficient GPU memory and storage space
 3. Distributed training requires proper environment variable settings (`MLP_WORKER_NUM`, `MLP_ROLE_INDEX`, `MLP_WORKER_0_HOST`, `MLP_WORKER_0_PORT`)
 4. Ensure the input JSONL file format is correct during inference
+
+## Citation
+If you use Skywork UniPic 3.0 in your research, please cite:
+```
+@misc{wei2026skyworkunipic30unified,
+      title={Skywork UniPic 3.0: Unified Multi-Image Composition via Sequence Modeling}, 
+      author={Hongyang Wei and Hongbo Liu and Zidong Wang and Yi Peng and Baixin Xu and Size Wu and Xuying Zhang and Xianglong He and Zexiang Liu and Peiyu Wang and Xuchen Song and Yangguang Li and Yang Liu and Yahui Zhou},
+      year={2026},
+      eprint={2601.15664},
+      archivePrefix={arXiv},
+      primaryClass={cs.CV},
+      url={https://arxiv.org/abs/2601.15664}, 
+}
+```

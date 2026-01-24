@@ -198,15 +198,12 @@ python scripts/image2text.py configs/models/qwen2_5_1_5b_kl16_mar_h.py \
 
 
 ## Citation
-If you use Skywork-UniPic in your research, please cite:
+If you use Skywork UniPic in your research, please cite:
 ```
-@misc{wang2025skyworkunipicunifiedautoregressive,
-      title={Skywork UniPic: Unified Autoregressive Modeling for Visual Understanding and Generation}, 
-      author={Peiyu Wang and Yi Peng and Yimeng Gan and Liang Hu and Tianyidan Xie and Xiaokun Wang and Yichen Wei and Chuanxin Tang and Bo Zhu and Changshi Li and Hongyang Wei and Eric Li and Xuchen Song and Yang Liu and Yahui Zhou},
-      year={2025},
-      eprint={2508.03320},
-      archivePrefix={arXiv},
-      primaryClass={cs.CV},
-      url={https://arxiv.org/abs/2508.03320}, 
+@article{wang2025skywork,
+  title={Skywork unipic: Unified autoregressive modeling for visual understanding and generation},
+  author={Wang, Peiyu and Peng, Yi and Gan, Yimeng and Hu, Liang and Xie, Tianyidan and Wang, Xiaokun and Wei, Yichen and Tang, Chuanxin and Zhu, Bo and Li, Changshi and others},
+  journal={arXiv preprint arXiv:2508.03320},
+  year={2025}
 }
 ```
