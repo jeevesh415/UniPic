@@ -26,7 +26,7 @@ torchrun \
     --master_addr ${MLP_WORKER_0_HOST:-localhost} \
     --master_port ${MLP_WORKER_0_PORT:-29500} \
     qwen_image_edit_fast/train_cm.py \
-    qwen_image_edit_fast/configs/gemini_all_datasets.py \
+    qwen_image_edit_fast/configs/datasets.py \
     --work_dir ${WORK_DIR:-work_dirs/Qwen-Image-Edit-CM-full-20k-bsz256-all-datasets} \
     --guidance_scale ${GUIDANCE_SCALE:-1.75} \
     --train_steps ${TRAIN_STEPS:-20000} \

@@ -28,7 +28,7 @@ UniPic-3/
 │   ├── pipeline_qwenimage_edit.py  # Pipeline implementation
 │   ├── train_fsdp_bsz1.py       # FSDP training code
 │   ├── configs/                 # Configuration files
-│   │   └── gemini_all_datasets.py
+│   │   └── datasets.py          # Training Dataset
 │   ├── scripts/
 │   │   ├── train.sh             # Training script
 │   │   └── inference.sh         # Inference script
@@ -42,7 +42,7 @@ UniPic-3/
     ├── inference.py             # Single inference
     ├── pipeline_qwenimage_edit.py  # Pipeline implementation
     ├── configs/                 # Configuration files
-    │   └── gemini_all_datasets.py
+    │   └── datasets.py          # Training Dataset
     ├── scripts/
     │   ├── train_cm.sh          # CM training script
     │   ├── train_dmd.sh         # DMD training script

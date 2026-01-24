@@ -26,7 +26,7 @@ torchrun \
     --master_addr ${MLP_WORKER_0_HOST:-localhost} \
     --master_port ${MLP_WORKER_0_PORT:-29500} \
     qwen_image_edit_fast/train_dmd.py \
-    qwen_image_edit_fast/configs/gemini_all_datasets.py \
+    qwen_image_edit_fast/configs/datasets.py \
     --work_dir ${WORK_DIR:-work_dirs/Qwen-Image-Edit-DMD-full-20k-bsz64} \
     --guidance_scale ${GUIDANCE_SCALE:-6.0} \
     --lr_scheduler ${LR_SCHEDULER:-cosine} \
